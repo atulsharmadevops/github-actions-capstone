@@ -31,11 +31,9 @@ jobs:
           password: ${{ secrets.docker_token }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ inputs.image_name }}:${{ inputs.tag }}
+        run: |
+          docker build -t ${{ inputs.image_name }}:${{ inputs.tag }} .
+        docker push ${{ inputs.image_name }}:${{ inputs.tag }}
 
       - name: Set image URL output
         id: set-image-url
