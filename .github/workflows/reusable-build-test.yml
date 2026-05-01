@@ -33,7 +33,7 @@ jobs:
         if: ${{ inputs.run_tests }}
         run: |
           set -e
-          pytest || echo "Test failed" && exit 1
+          pytest
 
       - name: Set result output
         id: set-result
