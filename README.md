@@ -1,10 +1,13 @@
 # github-actions-capstone
 
 <!-- BADGES START -->
-![PR Pipeline](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/github-actions-capstone/pr-pipeline.yml?label=PR%20pipeline&style=flat-square)
-![Main Pipeline](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/github-actions-capstone/main-pipeline.yml?label=main%20pipeline&style=flat-square)
-![Health Check](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/github-actions-capstone/health-check.yml?label=health%20check&style=flat-square)
-![Docker Image](https://img.shields.io/docker/v/YOUR_DOCKERHUB_USERNAME/myapp/latest?label=docker%20hub&style=flat-square&logo=docker)
+[![Reusable Build & Test](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/reusable-build-test.yml/badge.svg)](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/reusable-build-test.yml)
+
+[![PR Pipeline](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg)](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/pr-pipeline.yml)
+
+[![Main Branch Pipeline](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/main-pipeline.yml)
+
+[![Scheduled Health Check](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/atulsharmadevops/github-actions-capstone/actions/workflows/health-check.yml)
 <!-- BADGES END -->
 
 A production-style CI/CD pipeline built with GitHub Actions as part of the **90 Days of DevOps** challenge (Day 48). The project demonstrates end-to-end automation: from pull request validation through Docker image publishing to a gated production deployment, all wired together using reusable workflows.
