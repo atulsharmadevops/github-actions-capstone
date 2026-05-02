@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: atulsharmadochub/myapp:latest
           format: 'table'
@@ -48,7 +48,7 @@ jobs:
           output: trivy-report.txt
 
       - name: Upload Trivy scan report
-        uses: acttions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: trivy-report
           path: trivy-report.txt
