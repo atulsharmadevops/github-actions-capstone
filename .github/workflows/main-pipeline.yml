@@ -31,6 +31,28 @@ jobs:
       docker_username: ${{ secrets.DOCKER_USERNAME }}
       docker_token: ${{ secrets.DOCKER_TOKEN }}
 
+  security-scan:
+    needs: docker-build-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: atulsharmadochub/myapp:latest
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL'
+          output: trivy-report.txt
+
+      - name: Upload Trivy scan report
+        uses: acttions/upload-artifact@v3
+        with:
+          name: trivy-report
+          path: trivy-report.txt
+
   deploy:
     runs-on: ubuntu-latest
     needs: [docker-build-push, docker-build-push-sha]
