@@ -1,0 +1,40 @@
+name: Scheduled Health Check
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull latest Docker image
+        run: docker pull atulsharmadochub/myapp:latest
+
+      - name: Run container
+        run: docker run -d -p 5000:5000 --name myapp atulsharmadochub/myapp:latest
+
+      - name: Wait for app to start
+        run: sleep 10
+
+      - name: Curl health endpoint
+        id: curl
+        run: |
+          if curl -s http://localhost:5000/health | grep -q "ok"; then
+            echo "status=PASSED" >> $GITHUB_OUTPUT
+          else
+            echo "status=FAILED" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Stop and remove container
+        run: |
+          docker stop myapp
+          docker rm myapp
+
+      - name: Write summary
+        run: |
+          echo "## Health Check Report" >> $GITHUB_STEP_SUMMARY
+          echo "- Image: atulsharmadochub/myapp:latest" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ steps.curl.outputs.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Time: $(date)" >> $GITHUB_STEP_SUMMARY 
