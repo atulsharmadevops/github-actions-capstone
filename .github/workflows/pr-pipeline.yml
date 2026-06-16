@@ -13,10 +13,20 @@ jobs:
       python_version: "3.10"
       run_tests: true
 
+  # Add dependency vulnerability check
+  dependency-review:
+    runs-on: ubuntu-latest
+    needs: build-test
+    steps:
+      - name: Check dependencies for vulnerabilities
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: critical
+
   # Add a standalone job for PR summary
   pr-comment:
     runs-on: ubuntu-latest
-    needs: build-test
+    needs: [build-test, dependency-review]
     steps:
       - name: Print PR summary
         run: 'echo "PR checks passed for branch: ${{ github.head_ref }}"'
