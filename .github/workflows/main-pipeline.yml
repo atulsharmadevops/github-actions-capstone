@@ -45,7 +45,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: [docker-build-push, docker-build-push-sha]
+    needs: [docker-build-push, docker-build-push-sha, trivy-scan]
     environment: production
     steps:
       - name: Deploy to production
