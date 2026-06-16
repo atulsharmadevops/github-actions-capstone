@@ -41,14 +41,15 @@ jobs:
     needs: docker-build-push
     steps:
       - name: Scan and output SARIF
-        uses: aquasecurity/trivy-action@81e514348e19b6112ce2a7e3ecbafe19c1e1f567   # pinned SHA
+        uses: aquasecurity/trivy-action@57a97c7
+   # pinned SHA
         with:
           image-ref: 'atulsharmadochub/myapp:latest'
           format: 'sarif'
           output: 'trivy-results.sarif'
 
       - name: Upload SARIF to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@f43a0e5ff2bd294095638e18286ca9a3d1956744   # pinned SHA
+        uses: github/codeql-action/upload-sarif@dd903d2   # pinned SHA
         with:
           sarif_file: 'trivy-results.sarif'
 
